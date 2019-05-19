@@ -1,0 +1,1 @@
+//alert(' Aqui podras crear tus aminoacidos')
