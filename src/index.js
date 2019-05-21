@@ -1,6 +1,7 @@
 const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
+const bodyParser = require("body-parser");
 
 const app = express();
 mongoose.connect('mongodb://localhost/amino-database')
@@ -18,6 +19,16 @@ app.use(express.json());// cada vez que recibimos el jason el servidor lo entien
 
 //Routes
 app.use('/tasks',require('./routes/tasks'));
+
+//Error
+app.use(bodyParser.json());
+app.use(function (error, req, res, next) {
+    if(error instanceof SyntaxError){ //Handle SyntaxError here.
+        return res.status(500).send({data : "Invalid data"});
+    } else {
+        next();
+    }
+});
 
 
 
