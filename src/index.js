@@ -4,8 +4,12 @@ const mongoose = require('mongoose');
 const bodyParser = require("body-parser");
 
 const app = express();
-mongoose.connect('mongodb://localhost/amino-database')
-    .then(db => console.log('DB esta conectada'))
+
+mongoose.connect("mongodb://localhost:3000/mean-course" , { useNewUrlParser: true }).then(
+    (res) => {
+        console.log("Connected to Database Successfully.")
+    }
+).then(db => console.log('DB esta conectada'))
     .catch(err => console.error(err));
 
 //Configuraciones
@@ -46,3 +50,4 @@ app.use(express.static(__dirname + '/public'));// comparto mi carpeta public al 
 app.listen(app.get('port'), ()=>{
     console.log('Servidor levantado en el puerto', app.get('port'));
 });
+
